@@ -9,15 +9,19 @@ import {
   Monitor,
   UserCircle,
   LogOut,
+  ShieldAlert,
 } from 'lucide-react';
 import type { Locale, ThemeMode } from '@/types';
+import { useRole } from '@/components/auth/protected-route';
 import { useUniAuth } from '@55387.ai/uniauth-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function SettingsPage() {
   const { t, locale, setLocale } = useLocale();
   const { theme, setTheme } = useTheme();
   const { user, logout } = useUniAuth();
+  const { role } = useRole();
 
   const themeOptions: { value: ThemeMode; icon: typeof Sun; labelKey: string }[] = [
     { value: 'light', icon: Sun, labelKey: 'settings.light' },
@@ -134,6 +138,33 @@ export default function SettingsPage() {
           </div>
         </div>
       </section>
+
+      {/* User Management (Admin Only) */}
+      {role === 'admin' && (
+        <section className="rounded-xl bg-card p-5 border border-border">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                <ShieldAlert size={20} className="text-primary" />
+              </div>
+              <div>
+                <h2 className="text-[16px] font-semibold text-foreground">
+                  User Management
+                </h2>
+                <p className="text-sm text-muted-foreground">
+                  View and manage user roles and dashboard permissions.
+                </p>
+              </div>
+            </div>
+            <Link
+              href="/settings/users"
+              className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary/90"
+            >
+              Manage Users
+            </Link>
+          </div>
+        </section>
+      )}
 
       {/* Logout */}
       <section className="rounded-xl bg-card p-5 border border-border">

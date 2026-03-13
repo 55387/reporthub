@@ -50,6 +50,17 @@ export interface PaginatedResult<T> {
   totalPages: number;
 }
 
+// User Profile / Roles
+export interface ReportHubUser {
+  uniauth_id: string;
+  email: string;
+  nickname: string;
+  avatar_url: string;
+  role: 'admin' | 'viewer' | 'pending';
+  last_login_at: string;
+  created_at?: string;
+}
+
 // Dashboard stats
 export interface DashboardStats {
   totalShares: number;
