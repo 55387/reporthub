@@ -31,7 +31,13 @@
     "verifying_session": "正在验证会话...",
     "welcome_to": "欢迎使用",
     "login_description": "请使用 UniAuth 登录以访问晨读营数据大屏。",
-    "login_with_uniauth": "使用 UniAuth 登录"
+    "login_with_uniauth": "使用 UniAuth 登录",
+    "access_denied": "拒绝访问",
+    "pending_approval": "等待审核",
+    "banned_desc": "您的账号已被限制访问。",
+    "pending_desc": "欢迎回来！您的账号目前正在等待管理员审核。请联系管理员获取访问权限。",
+    "switch_account": "切换账号",
+    "sign_out": "退出登录"
   },
   "shares": {
     "title": "分享浏览",

@@ -25,6 +25,25 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Failed to sync user' }, { status: 500 });
     }
 
+    // Log user access
+    const forwardedFor = request.headers.get('x-forwarded-for');
+    const ipAddress = forwardedFor ? forwardedFor.split(',')[0].trim() : request.headers.get('x-real-ip');
+    const userAgent = request.headers.get('user-agent');
+
+    const action = role === 'banned' ? 'access_denied_banned' : (role === 'pending' ? 'access_denied_pending' : 'login_success');
+
+    const { error: logError } = await supabase.rpc('log_user_access', {
+      p_uniauth_id: uniauth_id,
+      p_action: action,
+      p_ip_address: ipAddress || null,
+      p_user_agent: userAgent || null,
+    });
+
+    if (logError) {
+      console.error('Error logging user access:', logError);
+      // We don't fail the sync request if logging fails
+    }
+
     // Role will be returned as text (e.g. 'pending', 'admin', 'viewer')
     return NextResponse.json({ role });
   } catch (error) {

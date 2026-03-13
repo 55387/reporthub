@@ -109,20 +109,23 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
             )}
           </div>
           <h1 className="text-2xl font-bold text-text-primary">
-            {dbRole === 'banned' ? 'Access Denied' : 'Pending Approval'}
+            {dbRole === 'banned' ? (t('Auth.access_denied') || 'Access Denied') : (t('Auth.pending_approval') || 'Pending Approval')}
           </h1>
           <p className="text-text-secondary w-full px-4 mt-2">
             {dbRole === 'banned' 
-              ? `Your account (${user?.nickname || user?.email || 'Unknown'}) has been restricted.`
-              : `Welcome back, ${user?.nickname || user?.email || 'User'}! Your account is currently pending administrator approval. Please ask an admin to grant you access.`
+              ? (t('Auth.banned_desc') || `Your account has been restricted.`)
+              : (t('Auth.pending_desc') || `Welcome back! Your account is currently pending administrator approval. Please ask an admin to grant you access.`)
             }
           </p>
-          <button
-            onClick={() => logout()}
-            className="flex w-full items-center justify-center gap-2 rounded-8px bg-error px-6 py-3 font-semibold text-white transition-colors hover:bg-error/90 mt-4 active:scale-95"
-          >
-            Sign Out
-          </button>
+          <div className="flex flex-col w-full gap-3 mt-4">
+            <button
+              onClick={() => logout()}
+              className="flex w-full h-12 items-center justify-center gap-2 rounded-[8px] bg-primary px-6 font-semibold text-white transition-colors hover:bg-primary/90 active:scale-95"
+            >
+              <LogIn className="w-5 h-5" />
+              {t('Auth.switch_account') || 'Switch Account'}
+            </button>
+          </div>
         </div>
       </div>
     );

@@ -31,7 +31,13 @@
     "verifying_session": "Verifying session...",
     "welcome_to": "Welcome to",
     "login_description": "Please login to access the Morning Reading Camp dashboard and data analytics.",
-    "login_with_uniauth": "Login with UniAuth"
+    "login_with_uniauth": "Login with UniAuth",
+    "access_denied": "Access Denied",
+    "pending_approval": "Pending Approval",
+    "banned_desc": "Your account has been restricted.",
+    "pending_desc": "Welcome back! Your account is currently pending administrator approval. Please ask an admin to grant you access.",
+    "switch_account": "Switch Account",
+    "sign_out": "Sign Out"
   },
   "shares": {
     "title": "Browse Shares",
